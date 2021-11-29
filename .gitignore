@@ -39,3 +39,4 @@ out/
 ### Custom ###
 gradle*
 .Ds_Store
+settings.gradle
