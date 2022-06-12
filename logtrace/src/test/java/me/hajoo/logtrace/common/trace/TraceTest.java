@@ -1,8 +1,8 @@
-package me.hajoo.logtrace.common.trace;
-
-import static org.junit.jupiter.api.Assertions.*;
+package me.hajoo.logtrace.v1;
 
 import org.junit.jupiter.api.Test;
+
+import me.hajoo.logtrace.common.trace.TraceStatus;
 
 class TraceTest {
 

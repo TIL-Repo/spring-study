@@ -1,11 +1,11 @@
-package me.hajoo.logtrace.repository;
+package me.hajoo.logtrace.v1.repository;
 
 import org.springframework.stereotype.Repository;
 
 import lombok.RequiredArgsConstructor;
-import me.hajoo.logtrace.common.trace.Trace;
 import me.hajoo.logtrace.common.trace.TraceId;
 import me.hajoo.logtrace.common.trace.TraceStatus;
+import me.hajoo.logtrace.v1.Trace;
 
 @Repository
 @RequiredArgsConstructor

@@ -1,36 +1,42 @@
-package me.hajoo.logtrace.common.trace;
-
-import org.springframework.stereotype.Component;
+package me.hajoo.logtrace.v2;
 
 import lombok.extern.slf4j.Slf4j;
+import me.hajoo.logtrace.common.trace.TraceId;
+import me.hajoo.logtrace.common.trace.TraceStatus;
 
 @Slf4j
-@Component
-public class Trace {
+public class FieldLogTraceImpl implements LogTrace {
 
 	private static final String START_PREFIX = "-->";
 	private static final String COMPLETE_PREFIX = "<--";
 	private static final String EX_PREFIX = "<X-";
 
+	private ThreadLocal<TraceId> traceIdHolder = new ThreadLocal<>();
 
+	@Override
 	public TraceStatus begin(String message) {
-		TraceId traceId = new TraceId();
+		syncTraceId();
+		TraceId traceId = traceIdHolder.get();
 		Long startTimeMs = System.currentTimeMillis();
 		log.info("[{}] {}{}", traceId.getId(), addSpace(START_PREFIX, traceId.getLevel()), message);
 		return new TraceStatus(traceId, startTimeMs, message);
 	}
 
-	public TraceStatus beginSync(TraceId beforeTraceId, String message) {
-		TraceId nextId = beforeTraceId.createNextId();
-		Long startTimeMs = System.currentTimeMillis();
-		log.info("[{}] {}{}", nextId.getId(), addSpace(START_PREFIX, nextId.getLevel()), message);
-		return new TraceStatus(nextId, startTimeMs, message);
+	private void syncTraceId() {
+		TraceId traceId = traceIdHolder.get();
+		if (traceId == null) {
+			traceIdHolder.set(new TraceId());
+		} else {
+			traceIdHolder.set(traceId.createNextId());
+		}
 	}
 
+	@Override
 	public void end(TraceStatus status) {
 		complete(status, null);
 	}
 
+	@Override
 	public void exception(TraceStatus status, Exception e) {
 		complete(status, e);
 	}
@@ -40,9 +46,22 @@ public class Trace {
 		long resultTimeMs = stopTimeMs - status.getStartTimeMs();
 		TraceId traceId = status.getTraceId();
 		if (e == null) {
-			log.info("[{}] {}{} time={}ms", traceId.getId(), addSpace(COMPLETE_PREFIX, traceId.getLevel()), status.getMessage(), resultTimeMs);
+			log.info("[{}] {}{} time={}ms", traceId.getId(), addSpace(COMPLETE_PREFIX, traceId.getLevel()),
+				status.getMessage(), resultTimeMs);
 		} else {
-			log.info("[{}] {}{} time={}ms ex={}", traceId.getId(), addSpace(EX_PREFIX, traceId.getLevel()), status.getMessage(), resultTimeMs, e.toString());
+			log.info("[{}] {}{} time={}ms ex={}", traceId.getId(), addSpace(EX_PREFIX, traceId.getLevel()),
+				status.getMessage(), resultTimeMs, e.toString());
+		}
+
+		releaseTraceId();
+	}
+
+	private void releaseTraceId() {
+		TraceId traceId = traceIdHolder.get();
+		if (traceId.isFirstLevel()) {
+			traceIdHolder.remove();
+		} else {
+			traceIdHolder.set(traceId.createPreviousId());
 		}
 	}
 

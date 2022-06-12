@@ -1,17 +1,17 @@
-package me.hajoo.logtrace.service;
+package me.hajoo.logtrace.v1.service;
 
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import me.hajoo.logtrace.common.trace.Trace;
 import me.hajoo.logtrace.common.trace.TraceId;
 import me.hajoo.logtrace.common.trace.TraceStatus;
-import me.hajoo.logtrace.repository.OrderRepository;
+import me.hajoo.logtrace.v1.Trace;
+import me.hajoo.logtrace.v1.repository.OrderRepository;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-	
+
 	private final OrderRepository orderRepository;
 	private final Trace trace;
 
