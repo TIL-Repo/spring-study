@@ -7,6 +7,11 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public void hello() {
-		log.info("Hello World!");
+		log.info("Hello");
+	}
+
+	@Override
+	public void world() {
+		log.info("World!");
 	}
 }
