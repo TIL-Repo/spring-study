@@ -17,10 +17,15 @@ public class AutoProxyConfig {
 		return new DefaultPointcutAdvisor(pointcut, new BeanPostProcessorConfig.TestAdvice());
 	}
 
-	@Bean
+	// @Bean
 	public Advisor advisor2() {
 		AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
 		pointcut.setExpression("execution(* me.hajoo.beanpostprocessor.service..*(..)) && !execution(* me.hajoo.beanpostprocessor.service..world(..))");
 		return new DefaultPointcutAdvisor(pointcut, new BeanPostProcessorConfig.TestAdvice());
+	}
+
+	@Bean
+	public AspectAdvisor advisor3() {
+		return new AspectAdvisor();
 	}
 }
