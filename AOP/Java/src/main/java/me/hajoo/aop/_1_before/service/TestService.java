@@ -1,4 +1,4 @@
-package me.hajoo.aop.service;
+package me.hajoo.aop._1_before.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

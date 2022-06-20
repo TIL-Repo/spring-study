@@ -1,4 +1,4 @@
-package me.hajoo.aop.annotation;
+package me.hajoo.aop._1_before.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

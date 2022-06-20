@@ -1,8 +1,8 @@
-package me.hajoo.aop.controller;
+package me.hajoo.aop._1_before.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import me.hajoo.aop.annotation.RecordLog;
-import me.hajoo.aop.service.TestService;
+import me.hajoo.aop._1_before.annotation.RecordLog;
+import me.hajoo.aop._1_before.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
