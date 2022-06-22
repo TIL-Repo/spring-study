@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.hajoo.aop._2_after.aop.AspectV1;
 import me.hajoo.aop._2_after.aop.AspectV2;
 import me.hajoo.aop._2_after.aop.AspectV3;
+import me.hajoo.aop._2_after.aop.AspectV4;
 import me.hajoo.aop._2_after.order.OrderRepository;
 import me.hajoo.aop._2_after.order.OrderService;
 
@@ -18,7 +19,8 @@ import me.hajoo.aop._2_after.order.OrderService;
 @SpringBootTest
 // @Import(AspectV1.class)
 // @Import(AspectV2.class)
-@Import({AspectV3.LogAspect.class, AspectV3.TransactionAspect.class})
+// @Import({AspectV3.LogAspect.class, AspectV3.TransactionAspect.class})
+@Import(AspectV4.class)
 public class AopTest {
 
 	@Autowired
