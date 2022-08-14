@@ -1,10 +1,10 @@
 package me.hajoo.eventlistener.publisher;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import me.hajoo.eventlistener.service.UserService;
 
 @SpringBootTest
 class CustomSpringEventPublisherTest {
@@ -14,9 +14,20 @@ class CustomSpringEventPublisherTest {
 	@Autowired
 	private GenericSpringEventPublisher genericSpringEventPublisher;
 
+	@Autowired
+	private UserService userService;
+
 	@Test
-	void generateEvent() throws Exception {
+	void generateEvent() {
 		customSpringEventPublisher.publishCustomEvent("hello");
-		genericSpringEventPublisher.publicGenericEvent("hello", true);
+		genericSpringEventPublisher.publicGenericStringEvent("hello", true);
+		genericSpringEventPublisher.publicGenericIntegerEvent(3, true);
+	}
+
+	@Test
+	void userEventTest(){
+		try {
+			userService.signup();
+		} catch (Exception e) {}
 	}
 }

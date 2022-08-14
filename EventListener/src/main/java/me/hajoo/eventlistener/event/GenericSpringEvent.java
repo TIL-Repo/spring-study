@@ -1,6 +1,9 @@
 package me.hajoo.eventlistener.event;
 
-public class GenericSpringEvent<T> {
+import org.springframework.core.ResolvableType;
+import org.springframework.core.ResolvableTypeProvider;
+
+public class GenericSpringEvent<T> implements ResolvableTypeProvider {
 
 	private T what;
 	private boolean success;
@@ -16,5 +19,13 @@ public class GenericSpringEvent<T> {
 
 	public boolean isSuccess() {
 		return success;
+	}
+
+	@Override
+	public ResolvableType getResolvableType() {
+		return ResolvableType.forClassWithGenerics(
+			getClass(),
+			ResolvableType.forInstance(what)
+		);
 	}
 }

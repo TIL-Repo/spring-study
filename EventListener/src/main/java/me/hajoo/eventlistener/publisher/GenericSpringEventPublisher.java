@@ -12,8 +12,13 @@ public class GenericSpringEventPublisher {
 	@Autowired
 	private ApplicationEventPublisher applicationEventPublisher;
 
-	public void publicGenericEvent(String message, boolean success) {
-		System.out.println("Publishing generic event.");
-		applicationEventPublisher.publishEvent(new GenericSpringEvent<>(message, success));
+	public void publicGenericStringEvent(String message, boolean success) {
+		System.out.println("Publishing generic string event.");
+		applicationEventPublisher.publishEvent(new GenericSpringEvent(message, success));
+	}
+
+	public void publicGenericIntegerEvent(Integer num, boolean success) {
+		System.out.println("Publishing generic integer event.");
+		applicationEventPublisher.publishEvent(new GenericSpringEvent(num, success));
 	}
 }
