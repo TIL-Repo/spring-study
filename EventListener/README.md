@@ -1,4 +1,4 @@
-# EventListener
+# Spring Events
 
 - Spring 내부에서 event 메커니즘을 가지고 있고 Bean들 사이에서 데이터를 전달할 수 있는 방법 중 하나이다.
 - [Event-Driven Architecture 참고](https://www.confluent.io/resources/event-driven-microservices/?utm_medium=sem&utm_source=google&utm_campaign=ch.sem_br.nonbrand_tp.prs_tgt.technical-research_mt.xct_rgn.apac_lng.eng_dv.all_con.event-driven-architecture&utm_term=event%20driven%20architecture&creative=&device=c&placement=&gclid=Cj0KCQjwuuKXBhCRARIsAC-gM0is_5yOoAkWBrncSv11b1jArCvmTafgnTqCYO_-z_6oODhW2mLXR_IaAsZIEALw_wcB)
@@ -308,5 +308,6 @@ public class UserSpringEventListener {
 
 ## Reference
 
+- [https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#context-functionality-events](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#context-functionality-events)
 - [https://www.baeldung.com/spring-events](https://www.baeldung.com/spring-events)
 - [https://stackoverflow.com/questions/71452445/eventlistener-for-generic-events-with-spring](https://stackoverflow.com/questions/71452445/eventlistener-for-generic-events-with-spring)
