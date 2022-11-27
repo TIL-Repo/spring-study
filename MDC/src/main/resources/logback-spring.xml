@@ -1,0 +1,15 @@
+<configuration scan="true" scanPeriod="10 seconds">
+    <property name="LOG_PATTERN" value="%-5level %d{yy-MM-dd HH:mm:ss}[%X{traceId}] [%logger{0}:%line] - %msg%n"></property>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                ${LOG_PATTERN}
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"></appender-ref>
+    </root>
+</configuration>
