@@ -1,12 +1,18 @@
 package me.hajoo.async;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
 
+@SpringBootTest
 class SnackShopTest {
+
+    @Autowired
+    private Executor executor;
 
     static final List<String> orders = Arrays.asList(
             "김밥",
@@ -60,6 +66,25 @@ class SnackShopTest {
         long startTime = System.currentTimeMillis();
         List<CompletableFuture<Snack>> snacks = orders.stream()
                 .map(order -> CompletableFuture.supplyAsync(() -> snackShop.makeSnack(order)))
+                .toList();
+
+        for (CompletableFuture<Snack> snack : snacks) {
+            snack.get();
+        }
+
+        // then
+        System.out.println("걸린 시간 : " + (System.currentTimeMillis() - startTime));
+    }
+
+    @Test
+    void asyncByCompletableFutureFromCustomThreadPool() throws Exception {
+        // given
+        SnackShop snackShop = SnackShop.open();
+
+        // when
+        long startTime = System.currentTimeMillis();
+        List<CompletableFuture<Snack>> snacks = orders.stream()
+                .map(order -> CompletableFuture.supplyAsync(() -> snackShop.makeSnack(order), executor))
                 .toList();
 
         for (CompletableFuture<Snack> snack : snacks) {

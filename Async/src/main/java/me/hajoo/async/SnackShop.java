@@ -33,7 +33,7 @@ public class SnackShop {
         // 조리중
         cooking(snack.getProductionWaitTime());
         // 완료
-        System.out.println(snack.getName() + " 음식을 만드는 데 "+ snack.getProductionWaitTime() + "ms 가 걸렸습니다.");
+        System.out.println(Thread.currentThread() + " " + snack.getName() + " 음식을 만드는 데 "+ snack.getProductionWaitTime() + "ms 가 걸렸습니다.");
         return snack;
     }
 
