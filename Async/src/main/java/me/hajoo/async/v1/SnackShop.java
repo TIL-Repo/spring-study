@@ -1,4 +1,4 @@
-package me.hajoo.async;
+package me.hajoo.async.v1;
 
 import java.util.*;
 

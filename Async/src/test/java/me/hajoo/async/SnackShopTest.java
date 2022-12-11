@@ -1,5 +1,7 @@
 package me.hajoo.async;
 
+import me.hajoo.async.v1.Snack;
+import me.hajoo.async.v1.SnackShop;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -61,7 +63,7 @@ class SnackShopTest {
     void asyncByCompletableFuture() throws Exception {
         // given
         SnackShop snackShop = SnackShop.open();
-        
+
         // when
         long startTime = System.currentTimeMillis();
         List<CompletableFuture<Snack>> snacks = orders.stream()
